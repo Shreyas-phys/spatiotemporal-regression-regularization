@@ -43,6 +43,8 @@ All models are implemented **from scratch** using gradient descent and cost mini
 
 ## 📌 Sample Output
 
+![](results/plots/Lc_plot.png)
+
 | Linear Fit | Polynomial Fit (Deg 5) | Ridge Regularized |
 |------------|------------------------|-------------------|
 | ![](results/plots/linear_fit.png) | ![](results/plots/poly_fit_deg5.png) | ![](results/plots/ridge_vs_lasso.png) |
