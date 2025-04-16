@@ -4,34 +4,48 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
+def getFirstArrivals(density,threshold):
+    num_times,num_sites = densities.shape
+    
+    arrivals=[]
+
+    for sites in range(num_sites):
+        for time in range(num_times):
+            if densities[time,sites] > threshold:
+                arrivals.append((sites,time))
+                break
+    return arrivals
+
+    
 # Load data
 data_path = os.path.join("src", "N15TFIMNNB05J1.txt")
 raw_data = np.loadtxt(data_path)
 
 # Extract time and spatial density
 times = raw_data[:, 0]         # (N_times,)
-densities = raw_data[:, 1:]    # (N_times, N_sites)
-n_sites = densities.shape[1]
+density = 1-raw_data[:, 1:]    # (N_times, N_sites)
+n_sites = density.shape[1]
+threshold=0.1
 
-# Increase figure size and use 'nearest' interpolation for sharp data representation
-plt.figure(figsize=(12, 8))  # Larger figure size for better resolution
-plt.imshow(
-    densities,
-    aspect='auto',
-    origin='lower',
-    cmap='viridis',
-    interpolation='nearest',  # Avoids blurring by using nearest neighbor interpolation
-    extent=[0, n_sites - 1, times[0], times[-1]]
-)
 
-# Labeling
-plt.xlabel("Site Index")
-plt.ylabel("Time")
-plt.title("Spatiotemporal Evolution (Density)")
-plt.colorbar(label="Density")
+# Get arrival data
+arrivals = getFirstArrivals(density, threshold)
+# Extract (site, time) → X = site, Y = time
+x_vals, y_vals = zip(*arrivals)  # site, time
 
-# Save the figure with higher DPI
-os.makedirs("results/plots", exist_ok=True)
+plt.figure(figsize=(10, 5))
+    
+# Show the density as a color image
+im = plt.imshow(density, aspect='auto', origin='lower', cmap='viridis', interpolation='none')
+
+# Plot black dots in correct (x, y) coordinates
+plt.plot(x_vals, y_vals, 'ko', markersize=4, label='First Arrivals')
+
+# Add a colorbar
+plt.colorbar(im, label='Density')
+# Labeling axes
+plt.xlabel('Site index')
+plt.ylabel('Time index')
+plt.title('Density Plot (Matrix View)')
 plt.tight_layout()
-plt.savefig("results/plots/spatiotemporal_plot.png", dpi=600)  # Higher DPI for better resolution
 plt.show()
