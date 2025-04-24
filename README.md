@@ -1,64 +1,43 @@
-# Spatiotemporal Regression and Regularization
+# Spatiotemporal Density Visualization
 
-This project implements **regression from scratch** to model signal propagation using **spatiotemporal data**, with a focus on **understanding the effects of regularization** and the **bias-variance tradeoff**.
+This repository contains a Python script to visualize spatiotemporal density data from a quantum spin system. The script identifies first arrival times based on a density threshold and overlays a best-fit line using the normal equation to capture the propagation front (e.g., a light cone).
 
-## 🧠 Motivation
+## Overview
 
-In many areas of physics and medicine, such as quantum information or EEG/fMRI analysis, we encounter signals that propagate through space and time. Estimating the **velocity of propagation** or **first arrival points** becomes essential.
+The script performs the following steps:
 
-This project extracts **first arrival points** from noisy spatiotemporal data and fits a model using:
-- **Linear Regression**
-- **Polynomial Regression (to show overfitting)**
-- **Ridge Regularization (L2)**
+1. **Load Data**: Reads a time-resolved density matrix from a text file, where the first column represents time and remaining columns represent site densities.
+2. **Extract First Arrivals**: For each site, detects the first time index where the density exceeds a given threshold.
+3. **Linear Fit**: Computes a best-fit line through the first arrival points using the normal equation from linear regression.
+4. **Plot**: Visualizes the full density matrix as a heatmap with overlays of the first arrival points and the fitted line.
 
-All models are implemented **from scratch** using gradient descent and cost minimization — no machine learning libraries.
+## File Structure
 
-## 🔍 Goals
+- `src/plot_spatiotemporal.py`: Main script for processing and plotting.
+- `src/N15TFIMNNB05J1.txt`: Sample data file with time and site-resolved density data.
 
-- Preprocess spatiotemporal data to detect first-arrival points via thresholding
-- Build a linear model from scratch minimizing MSE
-- Fit polynomial models and observe overfitting with high-degree terms
-- Use **Ridge regularization** to improve generalization
-- Visualize the **bias-variance tradeoff**
-- Compare all models using metrics such as:
-  - Mean Squared Error (MSE)
-  - Cross-Validation
-  - Residual plots
-  - Coefficient norms
+## Requirements
 
-## 🛠 Features
+- Python 3
+- numpy
+- matplotlib
 
-- 🧮 Gradient descent optimizer for cost minimization
-- 🧠 L2 regularization (Ridge)
-- 📈 Visualization of underfitting vs. overfitting
-- 📊 Statistical comparison of fits
-- 🔬 Application to physics-like spatiotemporal data
+Install dependencies with:
 
-## 📂 Structure
+```bash
+pip install numpy matplotlib
+```
 
-- `src/` — All from-scratch implementations
-- `data/` — Simulated or real spatiotemporal datasets
-- `notebooks/` — Analysis, visualization, and exploration
-- `results/` — Final figures and comparisons
+## Usage
 
-## 📌 Sample Output
+Run the script:
 
-![](results/plots/Lc_plot.png)
+```bash
+python src/plot_spatiotemporal.py
+```
 
-| Linear Fit | Polynomial Fit (Deg 5) | Ridge Regularized |
-|------------|------------------------|-------------------|
-| ![](results/plots/linear_fit.png) | ![](results/plots/poly_fit_deg5.png) | ![](results/plots/ridge_vs_lasso.png) |
+Modify the file path and threshold directly in the script as needed.
 
-## 🧪 Technologies
+## Applications
 
-- Python (NumPy, Matplotlib)
-- No ML libraries (sklearn, tensorflow, etc.)
-- All models built from first principles
-
-## 📘 Concepts Demonstrated
-
-- Linear and polynomial regression
-- Gradient descent optimization
-- Bias-variance tradeoff
-- Regularization (Ridge)
-- Signal extraction from noisy data
+This code is designed for analyzing quantum dynamics in spin systems, particularly for studying propagation fronts and emergent light-cone behavior in long-range interacting systems.
