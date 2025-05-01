@@ -13,20 +13,21 @@ The script performs the following steps:
 
 ## Normal Equation and Design Matrix
 
-The **normal equation** is a standard method used to find the best-fit line in linear regression. It minimizes the sum of squared residuals (the difference between the observed and predicted values). The equation for the best-fit line is derived by solving for the parameters \( \theta \) in the following form:
+The normal equation is a standard method used to find the best-fit line in linear regression. It minimizes the sum of squared residuals (the difference between the observed and predicted values). The equation for the best-fit line is derived by solving for the parameters $\theta$ in the following form:
 
 $$
 \theta = (X^T X)^{-1} X^T y
 $$
 
 Where:
-- \( X \) is the **design matrix**, which includes a column of ones (for the intercept) and a column of independent variables (in this case, the spatial site indices).
-- \( y \) is the dependent variable (the first arrival times corresponding to the site indices).
-- \( \theta \) contains the model parameters (slope and intercept) of the best-fit line.
+
+- $X$ is the design matrix, which includes a column of ones (for the intercept) and a column of independent variables (in this case, the spatial site indices).
+- $y$ is the dependent variable (the first arrival times corresponding to the site indices).
+- $\theta$ contains the model parameters (slope and intercept) of the best-fit line.
 
 In the code:
-- The design matrix \( X \) is constructed using the spatial site indices (x-values of first arrivals) and a column of ones to account for the intercept.
-- The normal equation is then applied to compute the best-fit line that represents the propagation front, or light cone, of the density wavefront.
+-The design matrix $X$ is constructed using the spatial site indices (x-values of first arrivals) and a column of ones to account for the intercept.
+-The normal equation is then applied to compute the best-fit line that represents the propagation front, or light cone, of the density wavefront.
 
 ## File Structure
 
