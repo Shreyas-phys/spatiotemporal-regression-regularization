@@ -15,9 +15,9 @@ The script performs the following steps:
 
 The **normal equation** is a standard method used to find the best-fit line in linear regression. It minimizes the sum of squared residuals (the difference between the observed and predicted values). The equation for the best-fit line is derived by solving for the parameters \( \theta \) in the following form:
 
-\[
+$$
 \theta = (X^T X)^{-1} X^T y
-\]
+$$
 
 Where:
 - \( X \) is the **design matrix**, which includes a column of ones (for the intercept) and a column of independent variables (in this case, the spatial site indices).
